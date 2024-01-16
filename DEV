@@ -1,0 +1,21 @@
+Issues to solve
+===============
+
+Q:  Distributed lock mechanism
+    How to ensure sync over multiple slaves?
+
+    A:  Not interested to solve
+
+Q:  How to handle process failover?
+    Processing commits on both client and master side?
+    How to manage when something happens?
+
+    A: Write-Ahead-Log, Commit log
+
+Q:  How to handle bad code implementation?
+    Forget to apply commit? Or returning a false version
+    of an object?
+
+Q:  How to ensure slave to be always synced?
+
+Q:  How to partially sync slaves (after paniced reboot?)

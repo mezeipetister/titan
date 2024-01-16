@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package demo;
+
+service Commit {
+  rpc Start(StartRequest) returns (stream StartResponse) {}
+}
+
+message StartRequest {}
+
+// Pull
+// Ok
+message StartResponse {}
