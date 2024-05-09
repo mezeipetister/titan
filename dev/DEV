@@ -1,3 +1,15 @@
+Communication types
+
+Any (Slave or Controller) ->Master
+- CreateCommit
+- CloseCommit
+
+Slave->Master
+- Connect(Sync)
+- Commit (Commit changed objects)
+
+
+
 Issues to solve
 ===============
 
@@ -19,3 +31,9 @@ Q:  How to handle bad code implementation?
 Q:  How to ensure slave to be always synced?
 
 Q:  How to partially sync slaves (after paniced reboot?)
+
+Sprints
+=======
+
+#1: 2024.01.16-2024.01.21
+#2: 2024.01.22-2024.01.29

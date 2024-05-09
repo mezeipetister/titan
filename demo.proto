@@ -2,12 +2,33 @@ syntax = "proto3";
 
 package demo;
 
-service Commit {
-  rpc Start(StartRequest) returns (stream StartResponse) {}
+service Master {
+  // Create a commit, lock master
+  rpc CreateCommit(CreateCommitRequest) returns (stream CreateCommitRequest) {}
+  // Close commit and release lock
+  rpc CloseCommit(CloseCommitRequest) returns (CloseCommitResponse) {}
+  // Maybe? Checkout to a point?
+  rpc Connect(InitRequest) returns (stream Frame) {}
 }
+
+message CreateCommitRequest {}
+
+message CreateCommitResponse {}
+
+message InitRequest {}
+
+message SubscribeCommitsReq {}
+
+message CloseCommitRequest {}
+
+message CloseCommitResponse {}
 
 message StartRequest {}
 
 // Pull
 // Ok
 message StartResponse {}
+
+message Frame {
+  bytes frame_bytes = 1;
+}

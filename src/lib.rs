@@ -2,6 +2,10 @@ use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, sync::Arc};
 use tokio::sync::Mutex;
 
+mod cf;
+mod frame;
+mod log;
+mod master;
 mod mutex;
 
 struct LocalCollection<T>
@@ -29,10 +33,13 @@ where
     remote_data: T,
 }
 
-struct Patch {
-    object_id: String,
-    data_bytes: Vec<u8>,
+// Transaction to a commit
+// All patches from a collection
+struct Transaction {
+    patches: Vec<(String, Patch)>,
 }
+
+struct Patch(Vec<u8>);
 
 struct Commit {
     id: i32,
@@ -71,6 +78,14 @@ mod v2 {
         message: String,
         index: HashMap<String, Vec<(String, String)>>, // HashMap<StorageId, Vec<(ObjectId, PatchId)>>
         objects: HashMap<String, Vec<u8>>,
+    }
+
+    impl Commit {
+        fn filter_by_storage_ids(mut self, storage_ids: &[&'_ str]) -> Self {
+            self.objects
+                .retain(|k, _| storage_ids.contains(&k.as_str()));
+            self
+        }
     }
 }
 

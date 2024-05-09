@@ -16,3 +16,4 @@ crc32fast = "1.2.0"
 nanoid = "0.3.0"
 sha2 = "0.10.8"
 tokio = {version="1.0.0", features = ["full"]}
+# walnut = "0.1.5"
